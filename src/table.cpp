@@ -6,7 +6,7 @@ namespace Table {
 
     void Table::printTable(Player::Player &player){
         std::string value0, value1, value2;
-        std::string line1 = "Vez do jogador: " + player.getName() + " ( " + (player.getSymbol()==0?"O":"X") +" )";
+        std::string line1 = "Vez do jogador: " + player.getName() + " ( " + (player.getSymbol()==0?"O":"X") +" )             ";
         value0 = (getValue(0,0) == -1?" ":getValue(0,0)==-2?"#":getValue(0,0)==0?"O":"X");
         value1 = (getValue(0,1) == -1?" ":getValue(0,1)==-2?"#":getValue(0,1)==0?"O":"X");
         value2 = (getValue(0,2) == -1?" ":getValue(0,2)==-2?"#":getValue(0,2)==0?"O":"X");
@@ -62,6 +62,17 @@ namespace Table {
                 if(m_table[i][ii] == -2){
                     axiX = i;
                     axiY = ii;
+                    return;
+                }
+            }
+        }
+    }
+
+    void Table::setNewSelection(){
+        for(int i=0;i<3;i++){
+            for(int ii=0;ii<3;ii++){
+                if(m_table[i][ii] == -1){
+                    m_table[i][ii] = -2;
                     return;
                 }
             }

@@ -33,6 +33,10 @@ public:
      * @brief Função que move a seleção de acordo com a tecla selecionada.
      */
     void moveSelection(const int&);
+    /**
+     * @brief Função que irá selecionar um novo campo para seleção
+     */
+    void setNewSelection();
 
 };
 

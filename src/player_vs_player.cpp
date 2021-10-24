@@ -8,13 +8,25 @@ namespace PlayPlay {
 
     void PlayPlay::game(){
         int key = 0;
-//        getPlayer(1);
-//        getPlayer(2);
-        while( key != ENTER_KEY){
-            m_table.printTable(m_player_1);
-            key = Functions::getKey();
-            m_table.moveSelection(key);
+        unsigned int end = 0;
+        unsigned int turn = 1;
+        int coord[2];
+        getPlayer(1);
+        getPlayer(2);
+        while(end == 0){
+            while( key != ENTER_KEY){
+
+                m_table.printTable((turn == 1?m_player_1:m_player_2));
+                key = Functions::getKey();
+                m_table.moveSelection(key);
+            }
+            m_table.getCoordSelect(coord[0], coord[1]);
+            m_table.setValue(coord[0], coord[1], (turn==1?1:0));
+            m_table.setNewSelection();
+            key = 0;
+            turn = !turn;
         }
+
     }
 
     void PlayPlay::getPlayer(const int &num){
