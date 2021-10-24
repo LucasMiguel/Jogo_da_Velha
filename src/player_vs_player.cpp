@@ -8,8 +8,8 @@ namespace PlayPlay {
 
     void PlayPlay::game(){
         int key = 0;
-        unsigned int end = 0;
-        unsigned int turn = 1;
+        int end = 0;
+        int turn = 1;
         int coord[2];
         getPlayer(1);
         getPlayer(2);
@@ -23,8 +23,17 @@ namespace PlayPlay {
             m_table.getCoordSelect(coord[0], coord[1]);
             m_table.setValue(coord[0], coord[1], (turn==1?1:0));
             m_table.setNewSelection();
+            end = m_table.checkWinner();
             key = 0;
             turn = !turn;
+        }
+        if(end == 1){
+            std::cout << "Jogador 1 venceu" << std::endl;
+        }else if(end == 2){
+            std::cout << "Jogador 2 venceu" << std::endl;
+        }
+        else{
+            std::cout << "Deu velha" << std::endl;
         }
 
     }
