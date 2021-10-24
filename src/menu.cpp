@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
-#include <curses.h>
-#include <cstring>
+#include <ncurses.h>
 #include "include/menu.h"
 #include "include/templates.h"
 #include "include/macros.h"
@@ -12,10 +11,18 @@ namespace Menu {
      * @brief Função que irá exibir o menu.
      */
     void Menu::printMenu(){
-        for (int i=0; i<4;i++){
-            std::cout << "\t\t\t" << (m_menu_list[i][0] == "1"? "=>": "  ");
-            std::cout << m_menu_list[i][1] << std::endl;
+//        Exibe o menu no modo de ncurse
+        initscr();
+        raw();
+        keypad(stdscr, TRUE);
+        noecho();
+        Templates::header(2);
+        for (int i=0; i<QUANT_ITENS_MENU;i++){
+            mvaddstr(9 + i, 17, (m_menu_list[i][0] == "1"? "=>": "  "));
+            mvaddstr(9 + i, 20, m_menu_list[i][1].c_str());
         }
+        Templates::footerInfoMenu();
+        endwin();
     }
 
     /**

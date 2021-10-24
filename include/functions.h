@@ -8,6 +8,10 @@ namespace Functions {
      * @return
      */
     int getKey();
+    /**
+     * @brief Função que limpa a tela.
+     */
+    void cleanWindow();
 }
 
 #endif // FUNCTIONS_H

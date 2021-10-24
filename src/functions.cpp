@@ -9,11 +9,10 @@ namespace Functions {
      * @return o valor da tecla
      */
     int getKey(){
-        Menu::Menu menu;
         //Variável com o valor da tecla clicada
         unsigned int key = 0;
         //Variável com o valor do comando escolhido
-        int command = 0;
+        int command = 1;
         /* Curses Initialisations */
         initscr();
         raw();
@@ -50,12 +49,18 @@ namespace Functions {
                 break;
             case ENTER_KEY:
                 command = ENTER_KEY;
-                break;
-            default:
-                command = 0;
-                break;
+                break;            
         }
         endwin();
         return command;
+    }
+
+    /**
+     * @brief Função que limpa a tela
+     */
+    void cleanWindow(){
+        initscr();
+        clear();
+        endwin();
     }
 }

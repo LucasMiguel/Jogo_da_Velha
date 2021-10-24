@@ -13,17 +13,19 @@ int main()
      * @brief Variável com o valor da tecla clicada
      */
     int key = 0;
-    Templates::start_message();
+
+    while( key != ENTER_KEY){
+        Templates::start_message();
+        key = Functions::getKey();
+    }
+    key = 0;
     Menu::Menu menu;
+    Functions::cleanWindow();
     while (key != ENTER_KEY) {
-        system(CLEAR);
-//        Templates::header();
-//        menu.printMenu();
+        menu.printMenu();
         key = Functions::getKey();
         menu.changeLine(key);
     }
-
-
 
 //    switch (menu.getLineSelectMenu()) {
 //    case 0:

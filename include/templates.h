@@ -9,7 +9,12 @@ namespace Templates {
     /**
      * @brief Função com o cabeçalho das telas
      */
-    void header();
+    void header(const int&);
+    /**
+     * @brief Função com as informações
+     */
+    void footerInfoMenu();
 }
 
 #endif // TEMPLATES_H
+
