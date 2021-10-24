@@ -31,6 +31,10 @@ const int DOWN = (+1);
 const int LEFT = (+1);
 const int RIGHT = (-1);
 
+//Definição dos valores de X e O
+const int X = 1;
+const int O = 2;
+
 /**
  * @brief Constante com a quantidade de itens no menu
  */

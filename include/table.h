@@ -10,7 +10,17 @@ class Table
 {
 private:
     int m_table[3][3] = {-2,-1,-1,-1,-1,-1,-1,-1,-1};
-
+//    int m_table_selection[3][3] = {-2,-1,-1,-1,-1,-1,-1,-1,-1}
+    int m_coor_win[8][3][2]={
+        {{0,0}, {0,1},{0,2}},
+        {{1,0},{1,1},{1,2}},
+        {{2,0},{2,1},{2,2}},
+        {{0,0},{1,0},{2,0}},
+        {{0,1},{1,1},{2,1}},
+        {{0,2},{1,2},{2,2}},
+        {{0,0},{1,1},{2,2}},
+        {{0,2},{1,1},{2,0}}
+    };
 public:
     Table() {}
     void printTable(Player::Player&);
@@ -35,8 +45,14 @@ public:
     void moveSelection(const int&);
     /**
      * @brief Função que irá selecionar um novo campo para seleção
+     * @return irá retornar 3 se não tiver mais posições, e terá dado velha
      */
     void setNewSelection();
+    /**
+     * @brief Função que irá checar se houve um vencedor.
+     * @return O valor indicará o vencedor | 0 = Sem vencedores | 1 = Jogador 1 | 2 = Jogador 2
+     */
+    int checkWinner();
 
 };
 

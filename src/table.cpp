@@ -1,23 +1,24 @@
 #include <iostream>
 #include <ncurses.h>
+#include "include/macros.h"
 #include "include/table.h"
 
 namespace Table {
 
     void Table::printTable(Player::Player &player){
         std::string value0, value1, value2;
-        std::string line1 = "Vez do jogador: " + player.getName() + " ( " + (player.getSymbol()==0?"O":"X") +" )             ";
-        value0 = (getValue(0,0) == -1?" ":getValue(0,0)==-2?"#":getValue(0,0)==0?"O":"X");
-        value1 = (getValue(0,1) == -1?" ":getValue(0,1)==-2?"#":getValue(0,1)==0?"O":"X");
-        value2 = (getValue(0,2) == -1?" ":getValue(0,2)==-2?"#":getValue(0,2)==0?"O":"X");
-        std::string row1 =  "||         "+value0+"  |  "+value1+"  |  "+value2+"         ||";
-        value0 = (getValue(1,0) == -1?" ":getValue(1,0)==-2?"#":getValue(1,0)==0?"O":"X");
-        value1 = (getValue(1,1) == -1?" ":getValue(1,1)==-2?"#":getValue(1,1)==0?"O":"X");
-        value2 = (getValue(1,2) == -1?" ":getValue(1,2)==-2?"#":getValue(1,2)==0?"O":"X");
+        std::string line1 = "Vez do jogador: " + player.getName() + " ( " + (player.getSymbol()==O?"O":"X") +" )             ";
+        value0 = (getValue(0,0) == -1?" ":getValue(0,0)==-2?"#":getValue(0,0)==O?"O":"X");
+        value1 = (getValue(0,1) == -1?" ":getValue(0,1)==-2?"#":getValue(0,1)==O?"O":"X");
+        value2 = (getValue(0,2) == -1?" ":getValue(0,2)==-2?"#":getValue(0,2)==O?"O":"X");
+        std::string row1 =  "||       X>"+value0+"  |O>"+value1+"  |  "+value2+"         ||";
+        value0 = (getValue(1,0) == -1?" ":getValue(1,0)==-2?"#":getValue(1,0)==O?"O":"X");
+        value1 = (getValue(1,1) == -1?" ":getValue(1,1)==-2?"#":getValue(1,1)==O?"O":"X");
+        value2 = (getValue(1,2) == -1?" ":getValue(1,2)==-2?"#":getValue(1,2)==O?"O":"X");
         std::string row2 =  "||         "+value0+"  |  "+value1+"  |  "+value2+"         ||";
-        value0 = (getValue(2,0) == -1?" ":getValue(2,0)==-2?"#":getValue(2,0)==0?"O":"X");
-        value1 = (getValue(2,1) == -1?" ":getValue(2,1)==-2?"#":getValue(2,1)==0?"O":"X");
-        value2 = (getValue(2,2) == -1?" ":getValue(2,2)==-2?"#":getValue(2,2)==0?"O":"X");
+        value0 = (getValue(2,0) == -1?" ":getValue(2,0)==-2?"#":getValue(2,0)==O?"O":"X");
+        value1 = (getValue(2,1) == -1?" ":getValue(2,1)==-2?"#":getValue(2,1)==O?"O":"X");
+        value2 = (getValue(2,2) == -1?" ":getValue(2,2)==-2?"#":getValue(2,2)==O?"O":"X");
         std::string row3 =  "||         "+value0+"  |  "+value1+"  |  "+value2+"         ||";
 
 
@@ -68,16 +69,15 @@ namespace Table {
         }
     }
 
-    int Table::setNewSelection(){
+    void Table::setNewSelection(){
         for(int i=0;i<3;i++){
             for(int ii=0;ii<3;ii++){
                 if(m_table[i][ii] == -1){
                     m_table[i][ii] = -2;
-                    return 0;
+                    return;
                 }
             }
         }
-        return 3;
     }
 
     void Table::moveSelection(const int &key){
@@ -121,12 +121,12 @@ namespace Table {
     int Table::checkWinner(){
         int calc = -9;
         for(int i=0;i<8;i++){
-            calc = getValue(m_coor_win[i][0][0], m_coor_win[i][0][1]) +
-                    getValue(m_coor_win[i][1][0], m_coor_win[i][1][1]) +
-                    getValue(m_coor_win[i][2][0], m_coor_win[i][2][1]);
+            calc = (getValue(m_coor_win[i][0][0], m_coor_win[i][0][1])) +
+                    (getValue(m_coor_win[i][1][0], m_coor_win[i][1][1])) +
+                    (getValue(m_coor_win[i][2][0], m_coor_win[i][2][1]));
             if(calc == 3){
                 return 1;
-            }else if(calc == 0){
+            }else if(calc == 6){
                 return 2;
             }
         }

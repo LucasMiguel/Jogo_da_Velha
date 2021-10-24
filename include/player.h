@@ -14,7 +14,7 @@ public:
     void setName(const std::string&);
     /**
      * @brief Função que irá inserir o simbolo do jogador
-     * 0 = O || 1 = X
+     * 0 = 2 || 1 = X
      */
     void setSymbol(const int&);
     /**

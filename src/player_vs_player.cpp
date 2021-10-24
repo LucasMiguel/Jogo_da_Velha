@@ -21,20 +21,22 @@ namespace PlayPlay {
                 m_table.moveSelection(key);
             }
             m_table.getCoordSelect(coord[0], coord[1]);
-            m_table.setValue(coord[0], coord[1], (turn==1?1:0));
+            m_table.setValue(coord[0], coord[1], (turn==1?1:2));
             m_table.setNewSelection();
             end = m_table.checkWinner();
             key = 0;
             turn = !turn;
         }
+        Functions::cleanWindow();
         if(end == 1){
             std::cout << "Jogador 1 venceu" << std::endl;
         }else if(end == 2){
-            std::cout << "Jogador 2 venceu" << std::endl;
+            std::cout << "Jogador 2 venceu"  << std::endl;
         }
         else{
             std::cout << "Deu velha" << std::endl;
         }
+        std::cin.get();
 
     }
 
@@ -48,10 +50,10 @@ namespace PlayPlay {
         std::cin >> name;
         if(num==1){
             m_player_1.setName(name);
-            m_player_1.setSymbol(1);
+            m_player_1.setSymbol(X);
         }else{
             m_player_2.setName(name);
-            m_player_2.setSymbol(0);
+            m_player_2.setSymbol(O);
         }
     }
 }
