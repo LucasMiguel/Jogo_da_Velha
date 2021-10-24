@@ -37,16 +37,14 @@ namespace Templates {
     {
         switch (choise) {
             case 1:
-                std::cout << "\t\t========= ################### ============= " << std::endl;
-                std::cout << "\t\t             JOGO DA VELHA                  " << std::endl;
-                std::cout << "\t\t========= ################### ============= \n\n" << std::endl;
+                std::cout << "\t\t================ ################### ================" << std::endl;
+                std::cout << "\t\t                    JOGO DA VELHA                    "  << std::endl;
+                std::cout << "\t\t================ ################### ================\n\n" << std::endl;
                 break;
             case 2:
-                mvaddstr(1,2, "\t\t================ ################### ================");
-                mvaddstr(2,2, "\t\t----------------                     ----------------");
-                mvaddstr(3,2, "\t\t                    JOGO DA VELHA                    ");
-                mvaddstr(4,2, "\t\t----------------                     ----------------");
-                mvaddstr(5,2, "\t\t================ ################### ================\n\n");
+                mvaddstr(0,2, "\t\t================ ################### ================");
+                mvaddstr(1,2, "\t\t                    JOGO DA VELHA                    ");
+                mvaddstr(2,2, "\t\t================ ################### ================\n\n");
                 break;
         }
     }
@@ -54,7 +52,14 @@ namespace Templates {
      * @brief Função com os dados de navegação do MENU
      */
     void footerInfoMenu(){
-        mvaddstr((LINES - 2), 2, "\t\tUse [W, A, S, D] para navegar e [ENTER] para selecionar");
+        mvaddstr((LINES - 2), 2, "\t\tUse [W, S] para navegar e [ENTER] para selecionar");
+        mvaddstr((LINES - 1), 2, "\t\t             Powered by Lucas Miguel                   ");
+    }
+    /**
+     * @brief Função com os dados de navegação do MENU
+     */
+    void footerInfoTable(){
+        mvaddstr((LINES - 2), 2, "\t\tUse [W, S, A, D] para navegar e [ENTER] para selecionar");
         mvaddstr((LINES - 1), 2, "\t\t             Powered by Lucas Miguel                   ");
     }
 

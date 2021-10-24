@@ -21,28 +21,28 @@ namespace Functions {
         key = getch();
         switch (key) {
             case W_KEY:
-                command = UP;
+                command = UP_KEY;
                 break;
             case UP_KEY:
-                command = UP;
+                command = UP_KEY;
                 break;
             case S_KEY:
-                command =DOWN;
+                command = DOWN_KEY;
                 break;
             case DOWN_KEY:
-                command =DOWN;
+                command = DOWN_KEY;
                 break;
             case A_KEY:
-                command = LEFT;
+                command = LEFT_KEY;
                 break;
             case LEFT_KEY:
-                command = LEFT;
+                command = LEFT_KEY;
                 break;
             case D_KEY:
-                command = RIGHT;
+                command = RIGHT_KEY;
                 break;
             case RIGHT_KEY:
-                command = RIGHT;
+                command = RIGHT_KEY;
                 break;
             case ESC_KEY:
                 command = ESC_KEY;

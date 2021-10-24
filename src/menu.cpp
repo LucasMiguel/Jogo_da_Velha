@@ -11,7 +11,7 @@ namespace Menu {
      * @brief Função que irá exibir o menu.
      */
     void Menu::printMenu(){
-//        Exibe o menu no modo de ncurse
+        //Exibe o menu no modo de ncurse
         initscr();
         raw();
         keypad(stdscr, TRUE);
@@ -58,12 +58,13 @@ namespace Menu {
     /**
      * @brief Função para mudança da linha
      */
-    void Menu::changeLine(int key){
+    void Menu::changeLine(const int &key){
         int selectedLine = 0;
-        if(key == UP || key == DOWN){
+        if(key == UP_KEY || key == DOWN_KEY){
+            int command = (key == UP_KEY?UP:DOWN);
             selectedLine = getLineSelectMenu();
             cleanMenu();
-            int newLine = key + selectedLine;
+            int newLine = command + selectedLine;
             setLine(newLine < 0 || newLine > (QUANT_ITENS_MENU-1)? selectedLine: newLine);
         }
         return;

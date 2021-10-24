@@ -14,6 +14,10 @@ namespace Templates {
      * @brief Função com as informações
      */
     void footerInfoMenu();
+    /**
+     * @brief Função com as informações do tabluleiro
+     */
+    void footerInfoTable();
 }
 
 #endif // TEMPLATES_H
