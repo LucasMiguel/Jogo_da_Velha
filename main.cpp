@@ -15,23 +15,26 @@ int main()
      * @brief Variável com o valor da tecla clicada
      */
     int key = 0;
-    //Instância do objeto de jogo Player vs Player
-    PlayPlay::PlayPlay playPlay;
-
         while( key != ENTER_KEY){
-            Templates::start_message();
+            Templates::startMessage();
             key = Functions::getKey();
         }
         key = 0;
     while(true){
+        //Instância do objeto de jogo Player vs Player
+        PlayPlay::PlayPlay playPlay;
+        //Isntância do objeto do menu
         Menu::Menu menu;
+        //Limpa a janela
         Functions::cleanWindow();
+        //Loop do menu
         while (key != ENTER_KEY) {
             menu.printMenu();
             key = Functions::getKey();
             menu.changeLine(key);
         }
         key = 0;
+        //Loop do menu
         Functions::cleanWindow();
         switch (menu.getLineSelectMenu()) {
         case 0:
@@ -44,7 +47,8 @@ int main()
         case 3:
             std::cout << "Opcao 4 do Menu" << std::endl; break;
         default:
-            return 0; break;
+            Functions::cleanWindow();
+            exit(0);
         }
     }
     return 0;

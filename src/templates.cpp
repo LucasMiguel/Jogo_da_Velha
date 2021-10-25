@@ -8,7 +8,7 @@ namespace Templates {
     /**
      * @brief Função com a tela de boas vinda ao jogo
      */
-    void start_message()
+    void startMessage()
     {
         initscr();
         int half_lines = ((LINES - 1))/2;
@@ -48,19 +48,69 @@ namespace Templates {
                 break;
         }
     }
+
+    /**
+     * @brief Função com a tela de vitório
+     */
+    void victoryMensage(const std::string &player)
+    {
+        std::string line = "\t" + player;
+        initscr();
+        int half_lines = ((LINES - 1))/2;
+        raw();
+        keypad(stdscr, TRUE);
+        noecho();
+        header(2);
+        mvaddstr( 4, (half_lines+12), "================ XXXXX ==================");
+        mvaddstr( 5, (half_lines+12), "||--------------       ----------------||");
+        mvaddstr( 6, (half_lines+12), "||                                     ||");
+        mvaddstr( 7, (half_lines+12), "||             PARABENS !!!!           ||");
+        mvaddstr( 8, (half_lines+12), "||                                     ||");
+        mvaddstr( 9, (half_lines+12), "||--------------       ----------------||");
+        mvaddstr( 10,(half_lines+12), "================ OOOOO ==================");
+        mvaddstr( 13,(half_lines+12), "          VITORIA DO JOGADOR             ");
+        mvaddstr( 14, (half_lines+12), line.c_str());
+        mvaddstr((LINES - 4), 0,"\t\t         Pressione [Enter] para continuar ... ");
+        endwin();
+    }
+
+    /**
+     * @brief Função com a tela de vitório
+     */
+    void drawMensage()
+    {
+        initscr();
+        int half_lines = ((LINES - 1))/2;
+        raw();
+        keypad(stdscr, TRUE);
+        noecho();
+        header(2);
+        mvaddstr( 4, (half_lines+12), "================ XXXXX ==================");
+        mvaddstr( 5, (half_lines+12), "||--------------       ----------------||");
+        mvaddstr( 6, (half_lines+12), "||                                     ||");
+        mvaddstr( 7, (half_lines+12), "||             QUE PENA !!!!           ||");
+        mvaddstr( 8, (half_lines+12), "||                                     ||");
+        mvaddstr( 9, (half_lines+12), "||--------------       ----------------||");
+        mvaddstr( 10,(half_lines+12), "================ OOOOO ==================");
+        mvaddstr( 13,(half_lines+12), "             FICOU EMPATADO              ");
+        mvaddstr((LINES - 4), 0,"\t\t         Pressione [Enter] para continuar ... ");
+        endwin();
+    }
+
+
     /**
      * @brief Função com os dados de navegação do MENU
      */
     void footerInfoMenu(){
         mvaddstr((LINES - 2), 2, "\t\tUse [W, S] para navegar e [ENTER] para selecionar");
-        mvaddstr((LINES - 1), 2, "\t\t             Powered by Lucas Miguel                   ");
+        mvaddstr((LINES - 1), 2, "\t    Powered by Lucas Miguel - https://github.com/LucasMiguel ");
     }
     /**
      * @brief Função com os dados de navegação do MENU
      */
     void footerInfoTable(){
         mvaddstr((LINES - 2), 2, "\t\tUse [W, S, A, D] para navegar e [ENTER] para selecionar");
-        mvaddstr((LINES - 1), 2, "\t\t             Powered by Lucas Miguel                   ");
+        mvaddstr((LINES - 1), 2, "\t    Powered by Lucas Miguel - https://github.com/LucasMiguel ");
     }
 
 

@@ -18,8 +18,8 @@ namespace Menu {
         noecho();
         Templates::header(2);
         for (int i=0; i<QUANT_ITENS_MENU;i++){
-            mvaddstr(9 + i, 17, (m_menu_list[i][0] == "1"? "=>": "  "));
-            mvaddstr(9 + i, 20, m_menu_list[i][1].c_str());
+            mvaddstr(7 + i, 17, (m_menu_list[i][0] == "1"? "=>": "  "));
+            mvaddstr(7 + i, 20, m_menu_list[i][1].c_str());
         }
         Templates::footerInfoMenu();
         endwin();

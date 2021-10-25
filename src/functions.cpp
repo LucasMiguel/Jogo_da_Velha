@@ -32,16 +32,16 @@ namespace Functions {
             case DOWN_KEY:
                 command = DOWN_KEY;
                 break;
-            case A_KEY:
+            case D_KEY:
                 command = LEFT_KEY;
+                break;
+            case RIGHT_KEY:
+                command = RIGHT_KEY;
                 break;
             case LEFT_KEY:
                 command = LEFT_KEY;
                 break;
-            case D_KEY:
-                command = RIGHT_KEY;
-                break;
-            case RIGHT_KEY:
+            case A_KEY:
                 command = RIGHT_KEY;
                 break;
             case ESC_KEY:

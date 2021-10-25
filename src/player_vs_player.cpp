@@ -13,18 +13,18 @@ namespace PlayPlay {
         int coord[2];
         getPlayer(1);
         getPlayer(2);
+        system(CLEAR);
         m_table.setNewSelection();
         while(end == 0){
             while( key != ENTER_KEY){
-
                 m_table.printTable((turn == 1?m_player_1:m_player_2));
                 key = Functions::getKey();
                 m_table.moveSelection(key);
             }
             m_table.getCoordSelect(coord[0], coord[1]);
             if(coord[0] >= 0){
-                m_table.setValue(coord[0], coord[1], (turn==1?1:2));
-//                end = m_table.checkWinner();
+                m_table.setValue(coord[0], coord[1], (turn==1?X:O));
+                end = m_table.checkWinner();
                 m_table.setNewSelection();
                 key = 0;
                 turn = !turn;
@@ -35,15 +35,22 @@ namespace PlayPlay {
         }
         Functions::cleanWindow();
         if(end == 1){
-            std::cout << "Jogador 1 venceu" << std::endl;
+            while( key != ENTER_KEY){
+                Templates::victoryMensage(m_player_1.getName());
+                key = Functions::getKey();
+            }
         }else if(end == 2){
-            std::cout << "Jogador 2 venceu"  << std::endl;
+            while( key != ENTER_KEY){
+                Templates::victoryMensage(m_player_2.getName());
+                key = Functions::getKey();
+            }
         }
         else{
-            std::cout << "Deu velha" << std::endl;
+            while( key != ENTER_KEY){
+                Templates::drawMensage();
+                key = Functions::getKey();
+            }
         }
-        std::cin.get();
-
     }
 
     void PlayPlay::getPlayer(const int &num){

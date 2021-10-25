@@ -164,13 +164,20 @@ namespace Table {
             calc = (getValue(m_coor_win[i][0][0], m_coor_win[i][0][1])) +
                     (getValue(m_coor_win[i][1][0], m_coor_win[i][1][1])) +
                     (getValue(m_coor_win[i][2][0], m_coor_win[i][2][1]));
-            if(calc == 3){
+            if(calc == 30){
                 return 1;
-            }else if(calc == 6){
+            }else if(calc == 60){
                 return 2;
             }
         }
-        return 0;
+        for(int i=0;i<3;i++){
+            for(int ii=0;ii<3;ii++){
+                if(m_table[i][ii] == -1){
+                    return 0;
+                }
+            }
+        }
+        return 3;
     }
 
 }
