@@ -8,18 +8,18 @@ namespace Table {
     void Table::printTable(Player::Player &player){
         std::string value0, value1, value2;
         std::string line1 = "Vez do jogador: " + player.getName() + " ( " + (player.getSymbol()==O?"O":"X") +" )             ";
-        value0 = (getValue(0,0) == -1?" ":getValue(0,0)==-2?"#":getValue(0,0)==O?"O":"X");
-        value1 = (getValue(0,1) == -1?" ":getValue(0,1)==-2?"#":getValue(0,1)==O?"O":"X");
-        value2 = (getValue(0,2) == -1?" ":getValue(0,2)==-2?"#":getValue(0,2)==O?"O":"X");
-        std::string row1 =  "||       X>"+value0+"  |O>"+value1+"  |  "+value2+"         ||";
-        value0 = (getValue(1,0) == -1?" ":getValue(1,0)==-2?"#":getValue(1,0)==O?"O":"X");
-        value1 = (getValue(1,1) == -1?" ":getValue(1,1)==-2?"#":getValue(1,1)==O?"O":"X");
-        value2 = (getValue(1,2) == -1?" ":getValue(1,2)==-2?"#":getValue(1,2)==O?"O":"X");
-        std::string row2 =  "||         "+value0+"  |  "+value1+"  |  "+value2+"         ||";
-        value0 = (getValue(2,0) == -1?" ":getValue(2,0)==-2?"#":getValue(2,0)==O?"O":"X");
-        value1 = (getValue(2,1) == -1?" ":getValue(2,1)==-2?"#":getValue(2,1)==O?"O":"X");
-        value2 = (getValue(2,2) == -1?" ":getValue(2,2)==-2?"#":getValue(2,2)==O?"O":"X");
-        std::string row3 =  "||         "+value0+"  |  "+value1+"  |  "+value2+"         ||";
+        value0 = (getValue(0,0) == -1?"  ":getValue(0,0)==-2?">#":getValue(0,0)==O?getValueSelect(0,0)==-2?">O":" O":getValueSelect(0,0)==-2?">X":" X");
+        value1 = (getValue(0,1) == -1?"  ":getValue(0,1)==-2?">#":getValue(0,1)==O?getValueSelect(0,1)==-2?">O":" O":getValueSelect(0,1)==-2?">X":" X");
+        value2 = (getValue(0,2) == -1?"  ":getValue(0,2)==-2?">#":getValue(0,2)==O?getValueSelect(0,2)==-2?">O":" O":getValueSelect(0,2)==-2?">X":" X");
+        std::string row1 =  "||        "+value0+"  | "+value1+"  | "+value2+"         ||";
+        value0 = (getValue(1,0) == -1?"  ":getValue(1,0)==-2?">#":getValue(1,0)==O?getValueSelect(1,0)==-2?">O":" O":getValueSelect(1,0)==-2?">X":" X");
+        value1 = (getValue(1,1) == -1?"  ":getValue(1,1)==-2?">#":getValue(1,1)==O?getValueSelect(1,1)==-2?">O":" O":getValueSelect(1,1)==-2?">X":" X");
+        value2 = (getValue(1,2) == -1?"  ":getValue(1,2)==-2?">#":getValue(1,2)==O?getValueSelect(1,2)==-2?">O":" O":getValueSelect(1,2)==-2?">X":" X");
+        std::string row2 =  "||        "+value0+"  | "+value1+"  | "+value2+"         ||";
+        value0 = (getValue(2,0) == -1?"  ":getValue(2,0)==-2?">#":getValue(2,0)==O?getValueSelect(2,0)==-2?">O":" O":getValueSelect(2,0)==-2?">X":" X");
+        value1 = (getValue(2,1) == -1?"  ":getValue(2,1)==-2?">#":getValue(2,1)==O?getValueSelect(2,1)==-2?">O":" O":getValueSelect(2,1)==-2?">X":" X");
+        value2 = (getValue(2,2) == -1?"  ":getValue(2,2)==-2?">#":getValue(2,2)==O?getValueSelect(2,2)==-2?">O":" O":getValueSelect(2,2)==-2?">X":" X");
+        std::string row3 =  "||        "+value0+"  | "+value1+"  | "+value2+"         ||";
 
 
         initscr();
@@ -57,10 +57,26 @@ namespace Table {
         m_table[axiX][axiY] = value;
     }
 
-    void Table::getCoordSelect(int &axiX, int &axiY){
+    int Table::getValueSelect(const unsigned int &axiX, const unsigned int &axiY){
+        return m_table_selection[axiX][axiY];
+    }
+
+    void Table::setValueSelect(const unsigned int &axiX, const unsigned int &axiY, const int &value){
+        m_table_selection[axiX][axiY] = value;
+    }
+
+    void Table::cleanTableSelect(){
+        for(int i=0; i<3;i++){
+            for(int ii=0;ii<3;ii++){
+                m_table_selection[i][ii] = -1;
+            }
+        }
+    }
+
+    void Table::getCoordSelectTable(int &axiX, int &axiY){
         for(unsigned int i=0; i<3;i++){
             for(unsigned int ii=0;ii<3;ii++){
-                if(m_table[i][ii] == -2){
+                if(m_table_selection[i][ii] == -2){
                     axiX = i;
                     axiY = ii;
                     return;
@@ -69,11 +85,27 @@ namespace Table {
         }
     }
 
+
+    void Table::getCoordSelect(int &axiX, int &axiY){
+        for(int i=0; i<3;i++){
+            for(int ii=0;ii<3;ii++){
+                if(m_table[i][ii] == -2){
+                    axiX = i;
+                    axiY = ii;
+                    return;
+                }
+            }
+        }
+        axiX = -1;
+    }
+
     void Table::setNewSelection(){
         for(int i=0;i<3;i++){
             for(int ii=0;ii<3;ii++){
                 if(m_table[i][ii] == -1){
                     m_table[i][ii] = -2;
+                    cleanTableSelect();
+                    m_table_selection[i][ii] = -2;
                     return;
                 }
             }
@@ -84,21 +116,25 @@ namespace Table {
         int axiX, axiY;
         //Variável que irá armazenar o valor do comando (-1) ou (1)
         int command = 0;
-        getCoordSelect(axiX, axiY);
-
+        getCoordSelectTable(axiX, axiY);
         if(key == UP_KEY || key == DOWN_KEY){
             command = (key==UP_KEY?UP:DOWN);
             /**
              * @brief Variável irá armazenar o valor já somada com a seleção da tecla e o valor da linha.
              */
             int axiXX = command + axiX;
-            while(axiXX >= 0 && axiXX < 3){
+
+            if(axiXX >= 0 && axiXX < 3){
+                //Muda o valor da célula de seleção
+                cleanTableSelect();                     /*Limpa a tabela de seleção*/
+                setValueSelect(axiXX, axiY, -2);        /*Muda o valor da nova celula*/
+                //Muda o valor da célula para real seleção
                 if(m_table[axiXX][axiY] == -1){
-                    setValue(axiX, axiY, -1); /*Muda o valor da antiga celula*/
-                    setValue(axiXX, axiY, -2); /*Muda o valor da nova celula*/
-                    return;
+                    setValue(axiXX, axiY, -2);          /*Muda o valor da nova celula*/
                 }
-                axiXX+=command;
+                if(m_table[axiX][axiY] < 0){
+                     setValue(axiX, axiY, -1); /*Muda o valor da antiga celula*/
+                }
             }
         }
         else if(key == LEFT_KEY || key == RIGHT_KEY){
@@ -107,13 +143,17 @@ namespace Table {
              * @brief Variável irá armazenar o valor já somada com a seleção da tecla e o valor da coluna.
              */
             int axiYY = command + axiY;
-            while(axiYY >= 0 && axiYY < 3){
+
+            if(axiYY >= 0 && axiYY < 3){
+                //Muda o valor da célula de seleção
+                cleanTableSelect();                     /*Limpa a tabela de seleção*/
+                setValueSelect(axiX, axiYY, -2);        /*Muda o valor da nova celula*/
                 if(m_table[axiX][axiYY] == -1){
-                    setValue(axiX, axiY, -1); /*Muda o valor da antiga celula*/
-                    setValue(axiX, axiYY, -2); /*Muda o valor da nova celula*/
-                    return;
+                    setValue(axiX, axiYY, -2);          /*Muda o valor da nova celula*/
                 }
-                axiYY+=command;
+                if(m_table[axiX][axiY] < 0){
+                    setValue(axiX, axiY, -1); /*Muda o valor da antiga celula*/
+                }
             }
         }
     }

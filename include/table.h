@@ -9,8 +9,8 @@ namespace Table {
 class Table
 {
 private:
-    int m_table[3][3] = {-2,-1,-1,-1,-1,-1,-1,-1,-1};
-//    int m_table_selection[3][3] = {-2,-1,-1,-1,-1,-1,-1,-1,-1}
+    int m_table[3][3] = {{-1,-1,-1},{-1,-1,-1},{-1,-1,-1}};
+    int m_table_selection[3][3] = {{-1,-1,-1},{-1,-1,-1},{-1,-1,-1}};
     int m_coor_win[8][3][2]={
         {{0,0}, {0,1},{0,2}},
         {{1,0},{1,1},{1,2}},
@@ -36,9 +36,28 @@ public:
      */
     void setValue(const unsigned int&, const unsigned int&, const int&);
     /**
+     * @brief Função que pega o valor da célula selecionada
+     * @return O valor da célula.
+     * || -2 = Seleciondada || -1 = Vazia.
+     */
+    int getValueSelect(const unsigned int&, const unsigned int&);
+    /**
+     * @brief Função que irá inserir o valor na tabela de seleção na célula de acordo
+     * com as cordenandas e o valor.
+     */
+    void setValueSelect(const unsigned int&, const unsigned int&, const int&);
+    /**
+     * @brief Função que irá limpar a tabela de seleção
+     */
+    void cleanTableSelect();
+    /**
      * @brief Função que retorna as coordenadas da célula selecionada.
      */
     void getCoordSelect(int&, int&);
+    /**
+     * @brief Função que retorna as coordenadas da célula selecionada na tabela de Movimentação.
+     */
+    void getCoordSelectTable(int&, int&);
     /**
      * @brief Função que move a seleção de acordo com a tecla selecionada.
      */

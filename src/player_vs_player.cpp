@@ -13,6 +13,7 @@ namespace PlayPlay {
         int coord[2];
         getPlayer(1);
         getPlayer(2);
+        m_table.setNewSelection();
         while(end == 0){
             while( key != ENTER_KEY){
 
@@ -21,11 +22,16 @@ namespace PlayPlay {
                 m_table.moveSelection(key);
             }
             m_table.getCoordSelect(coord[0], coord[1]);
-            m_table.setValue(coord[0], coord[1], (turn==1?1:2));
-            m_table.setNewSelection();
-            end = m_table.checkWinner();
-            key = 0;
-            turn = !turn;
+            if(coord[0] >= 0){
+                m_table.setValue(coord[0], coord[1], (turn==1?1:2));
+//                end = m_table.checkWinner();
+                m_table.setNewSelection();
+                key = 0;
+                turn = !turn;
+            }else{
+                m_table.setNewSelection();
+                key = 0;
+            }
         }
         Functions::cleanWindow();
         if(end == 1){
