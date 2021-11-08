@@ -5,9 +5,9 @@
 
 namespace Table {
 
-    void Table::printTable(Player::Player &player){
+    void Table::printTable(Player::Player *player){
         std::string value0, value1, value2;
-        std::string line1 = "Vez do jogador: " + player.getName() + " ( " + (player.getSymbol()==O?"O":"X") +" )             ";
+        std::string line1 = "Vez do jogador: " + player->getName() + " ( " + (player->getSymbol()==O?"O":"X") +" )             ";
         value0 = (getValue(0,0) == -1?"  ":getValue(0,0)==-2?">#":getValue(0,0)==O?getValueSelect(0,0)==-2?">O":" O":getValueSelect(0,0)==-2?">X":" X");
         value1 = (getValue(0,1) == -1?"  ":getValue(0,1)==-2?">#":getValue(0,1)==O?getValueSelect(0,1)==-2?">O":" O":getValueSelect(0,1)==-2?">X":" X");
         value2 = (getValue(0,2) == -1?"  ":getValue(0,2)==-2?">#":getValue(0,2)==O?getValueSelect(0,2)==-2?">O":" O":getValueSelect(0,2)==-2?">X":" X");
@@ -49,20 +49,20 @@ namespace Table {
 
     }
 
-    int Table::getValue(const unsigned int &axiX, const unsigned int &axiY){
+    int Table::getValue(const unsigned int axiX, const unsigned int axiY){
         return m_table[axiX][axiY];
     }
 
-    void Table::setValue(const unsigned int &axiX, const unsigned int &axiY, const int &value){
-        m_table[axiX][axiY] = value;
+    void Table::setValue(const unsigned int *axiX, const unsigned int *axiY, const int value){
+        m_table[*axiX][*axiY] = value;
     }
 
-    int Table::getValueSelect(const unsigned int &axiX, const unsigned int &axiY){
+    int Table::getValueSelect(const unsigned int axiX, const unsigned int axiY){
         return m_table_selection[axiX][axiY];
     }
 
-    void Table::setValueSelect(const unsigned int &axiX, const unsigned int &axiY, const int &value){
-        m_table_selection[axiX][axiY] = value;
+    void Table::setValueSelect(const unsigned int *axiX, const unsigned int *axiY, const int value){
+        m_table_selection[*axiX][*axiY] = value;
     }
 
     void Table::cleanTableSelect(){
@@ -73,12 +73,12 @@ namespace Table {
         }
     }
 
-    void Table::getCoordSelectTable(int &axiX, int &axiY){
+    void Table::getCoordSelectTable(unsigned int *axiX, unsigned int *axiY){
         for(unsigned int i=0; i<3;i++){
             for(unsigned int ii=0;ii<3;ii++){
                 if(m_table_selection[i][ii] == -2){
-                    axiX = i;
-                    axiY = ii;
+                    *axiX = i;
+                    *axiY = ii;
                     return;
                 }
             }
@@ -86,17 +86,17 @@ namespace Table {
     }
 
 
-    void Table::getCoordSelect(int &axiX, int &axiY){
+    void Table::getCoordSelect(unsigned int *axiX, unsigned int *axiY){
         for(int i=0; i<3;i++){
             for(int ii=0;ii<3;ii++){
                 if(m_table[i][ii] == -2){
-                    axiX = i;
-                    axiY = ii;
+                    *axiX = i;
+                    *axiY = ii;
                     return;
                 }
             }
         }
-        axiX = -1;
+        *axiX = -1;
     }
 
     void Table::setNewSelection(){
@@ -112,47 +112,47 @@ namespace Table {
         }
     }
 
-    void Table::moveSelection(const int &key){
-        int axiX, axiY;
+    void Table::moveSelection(const int *key){
+        unsigned int axiX, axiY;
         //Variável que irá armazenar o valor do comando (-1) ou (1)
         int command = 0;
-        getCoordSelectTable(axiX, axiY);
-        if(key == UP_KEY || key == DOWN_KEY){
-            command = (key==UP_KEY?UP:DOWN);
+        getCoordSelectTable(&axiX, &axiY);
+        if(*key == UP_KEY || *key == DOWN_KEY){
+            command = (*key==UP_KEY?UP:DOWN);
             /**
              * @brief Variável irá armazenar o valor já somada com a seleção da tecla e o valor da linha.
              */
-            int axiXX = command + axiX;
+            unsigned int axiXX = command + axiX;
 
             if(axiXX >= 0 && axiXX < 3){
                 //Muda o valor da célula de seleção
                 cleanTableSelect();                     /*Limpa a tabela de seleção*/
-                setValueSelect(axiXX, axiY, -2);        /*Muda o valor da nova celula*/
+                setValueSelect(&axiXX, &axiY, -2);        /*Muda o valor da nova celula*/
                 //Muda o valor da célula para real seleção
                 if(m_table[axiXX][axiY] == -1){
-                    setValue(axiXX, axiY, -2);          /*Muda o valor da nova celula*/
+                    setValue(&axiXX, &axiY, -2);          /*Muda o valor da nova celula*/
                 }
                 if(m_table[axiX][axiY] < 0){
-                     setValue(axiX, axiY, -1); /*Muda o valor da antiga celula*/
+                     setValue(&axiX, &axiY, -1); /*Muda o valor da antiga celula*/
                 }
             }
         }
-        else if(key == LEFT_KEY || key == RIGHT_KEY){
-            command = (key==RIGHT_KEY?RIGHT:LEFT);
+        else if(*key == LEFT_KEY || *key == RIGHT_KEY){
+            command = (*key==RIGHT_KEY?RIGHT:LEFT);
             /**
              * @brief Variável irá armazenar o valor já somada com a seleção da tecla e o valor da coluna.
              */
-            int axiYY = command + axiY;
+            unsigned int axiYY = command + axiY;
 
             if(axiYY >= 0 && axiYY < 3){
                 //Muda o valor da célula de seleção
                 cleanTableSelect();                     /*Limpa a tabela de seleção*/
-                setValueSelect(axiX, axiYY, -2);        /*Muda o valor da nova celula*/
+                setValueSelect(&axiX, &axiYY, -2);        /*Muda o valor da nova celula*/
                 if(m_table[axiX][axiYY] == -1){
-                    setValue(axiX, axiYY, -2);          /*Muda o valor da nova celula*/
+                    setValue(&axiX, &axiYY, -2);          /*Muda o valor da nova celula*/
                 }
                 if(m_table[axiX][axiY] < 0){
-                    setValue(axiX, axiY, -1); /*Muda o valor da antiga celula*/
+                    setValue(&axiX, &axiY, -1); /*Muda o valor da antiga celula*/
                 }
             }
         }

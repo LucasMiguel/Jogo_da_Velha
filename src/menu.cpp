@@ -58,10 +58,10 @@ namespace Menu {
     /**
      * @brief Função para mudança da linha
      */
-    void Menu::changeLine(const int &key){
+    void Menu::changeLine(const int* key){
         int selectedLine = 0;
-        if(key == UP_KEY || key == DOWN_KEY){
-            int command = (key == UP_KEY?UP:DOWN);
+        if(*key == UP_KEY || *key == DOWN_KEY){
+            int command = (*key == UP_KEY?UP:DOWN);
             selectedLine = getLineSelectMenu();
             cleanMenu();
             int newLine = command + selectedLine;

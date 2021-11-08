@@ -31,7 +31,7 @@ int main()
         while (key != ENTER_KEY) {
             menu.printMenu();
             key = Functions::getKey();
-            menu.changeLine(key);
+            menu.changeLine(&key);
         }
         key = 0;
         //Loop do menu

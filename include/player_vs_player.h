@@ -9,7 +9,7 @@ private:
     Player::Player m_player_1;
     Player::Player m_player_2;
     Table::Table m_table;
-    void getPlayer(const int&);
+    void getPlayer(const int);
 
 public:
     PlayPlay() {};

@@ -18,7 +18,7 @@ namespace Menu {
         Menu() {};
         int getLineSelectMenu();
         void printMenu();
-        void changeLine(const int&);
+        void changeLine(const int*);
     };
 
 }

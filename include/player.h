@@ -11,12 +11,12 @@ public:
     /**
      * @brief Função que irá inserir o nome do jogador
      */
-    void setName(const std::string&);
+    void setName(const std::string*);
     /**
      * @brief Função que irá inserir o simbolo do jogador
      * 0 = 2 || 1 = X
      */
-    void setSymbol(const int&);
+    void setSymbol(const int);
     /**
      * @brief Função para pegar o nome do jogador
      * @return Nome do jogador

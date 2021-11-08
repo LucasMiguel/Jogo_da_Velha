@@ -3,11 +3,11 @@
 
 namespace Player {
 
-void Player::setName(const std::string &name){
-    m_name = name;
+void Player::setName(const std::string *name){
+    m_name = *name;
 }
 
-void Player::setSymbol(const int &symbol){
+void Player::setSymbol(const int symbol){
     m_symbol = symbol;
 }
 
