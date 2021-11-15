@@ -26,6 +26,8 @@ add_executable(Jogo_da_Velha
   include/player.h
   src/player_vs_player.cpp
   include/player_vs_player.h
+  src/player_vs_com.cpp
+  include/player_vs_com.h
 )
 
 target_link_libraries(Jogo_da_Velha -lncurses)

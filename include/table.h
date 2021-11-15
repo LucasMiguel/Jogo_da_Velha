@@ -9,8 +9,8 @@ namespace Table {
 class Table
 {
 private:
-    int m_table[3][3] = {{-1,-1,-1},{-1,-1,-1},{-1,-1,-1}};
-    int m_table_selection[3][3] = {{-1,-1,-1},{-1,-1,-1},{-1,-1,-1}};
+    int m_table[3][3] = {{-1,-1,-1},{-1,-1,-1},{-1,-1,-1}}; //-1 = Vazio || 10 = X || 20 = O
+    int m_table_selection[3][3] = {{-1,-1,-1},{-1,-1,-1},{-1,-1,-1}}; // -1 = Sem seleção || -2 = Com seleção
     unsigned int m_coor_win[8][3][2]={
         {{0,0}, {0,1},{0,2}},
         {{1,0},{1,1},{1,2}},
@@ -22,7 +22,13 @@ private:
         {{0,2},{1,1},{2,0}}
     };
 public:
+    /**
+    * @brief Construtor
+    */
     Table() {}
+    /**
+     * @brief Imprime a tabela na tela
+     */
     void printTable(Player::Player*);
     /**
      * @brief Função que pega o valor da célula selecionada
@@ -45,7 +51,7 @@ public:
      * @brief Função que irá inserir o valor na tabela de seleção na célula de acordo
      * com as cordenandas e o valor.
      */
-    void setValueSelect(const unsigned int*, const unsigned int*, const int);
+    void setValueSelect(const unsigned int* axiX, const unsigned int*, const int);
     /**
      * @brief Função que irá limpar a tabela de seleção
      */
