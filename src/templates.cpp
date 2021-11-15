@@ -102,14 +102,14 @@ namespace Templates {
      * @brief Função com os dados de navegação do MENU
      */
     void footerInfoMenu(){
-        mvaddstr((LINES - 2), 2, "\t\tUse [W, S] para navegar e [ENTER] para selecionar");
+        mvaddstr((LINES - 2), 2, "\t\tUse [W, S] para navegar || [ENTER] para selecionar");
         mvaddstr((LINES - 1), 2, "\t    Powered by Lucas Miguel - https://github.com/LucasMiguel ");
     }
     /**
      * @brief Função com os dados de navegação do MENU
      */
     void footerInfoTable(){
-        mvaddstr((LINES - 2), 2, "\t\tUse [W, S, A, D] para navegar e [ENTER] para selecionar");
+        mvaddstr((LINES - 2), 2, "\t\tUse [W, S, A, D] para navegar || [ENTER] para selecionar");
         mvaddstr((LINES - 1), 2, "\t    Powered by Lucas Miguel - https://github.com/LucasMiguel ");
     }
 
