@@ -9,8 +9,11 @@ namespace Table {
 class Table
 {
 private:
+    ///Variável que armazena as jogadas já efetuadas
     int m_table[3][3] = {{-1,-1,-1},{-1,-1,-1},{-1,-1,-1}}; //-1 = Vazio || 10 = X || 20 = O
+    ///Variável que armazena a seleção para a próxima jogada
     int m_table_selection[3][3] = {{-1,-1,-1},{-1,-1,-1},{-1,-1,-1}}; // -1 = Sem seleção || -2 = Com seleção
+    ///Variável com a combinações de coordenadas de possíveis vitórias
     unsigned int m_coor_win[8][3][2]={
         {{0,0}, {0,1},{0,2}},
         {{1,0},{1,1},{1,2}},
@@ -30,6 +33,13 @@ public:
      * @brief Imprime a tabela na tela
      */
     void printTable(Player::Player*);
+    /**
+     * @brief Função que retorna a string para o campo.
+     * @param axiX - Coordenada em X.
+     * @param axiY - Coordenada em Y.
+     * @return - A string que irá no campo.
+     */
+    std::string returnValueField(int axiX, int axiY);
     /**
      * @brief Função que pega o valor da célula selecionada
      * @return O valor da célula.

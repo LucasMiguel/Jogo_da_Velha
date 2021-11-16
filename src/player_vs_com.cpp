@@ -27,15 +27,13 @@ namespace PlayCom {
                     key = Functions::getKey();
                     m_table.moveSelection(&key);
                 }
-                //Pega a seleção da tabela real
-                m_table.getCoordSelect(&coord[0], &coord[1]);
             }
             //Caso seja a máquina
             else{
                 comMove();
-                //Pega as coordenadas da célula da tabela de seleção
-                m_table.getCoordSelectTable(&coord[0], &coord[1]);
             }
+            //Pega as coordenadas da célula da tabela de seleção
+            m_table.getCoordSelectTable(&coord[0], &coord[1]);
             //Faz a jogada de acordo com o campo com a seleção
             mvaddstr((LINES - 3), 25, std::to_string(coord[0]).c_str());
             mvaddstr((LINES - 3), 29, std::to_string(coord[1]).c_str());

@@ -8,18 +8,9 @@ namespace Table {
     void Table::printTable(Player::Player *player){
         std::string value0, value1, value2;
         std::string line1 = "Vez do jogador: " + player->getName() + " ( " + (player->getSymbol()==O?"O":"X") +" )             ";
-        value0 = (getValue(0,0) == -1?"  ":getValue(0,0)==-2?">#":getValue(0,0)==O?getValueSelect(0,0)==-2?">O":" O":getValueSelect(0,0)==-2?">X":" X");
-        value1 = (getValue(0,1) == -1?"  ":getValue(0,1)==-2?">#":getValue(0,1)==O?getValueSelect(0,1)==-2?">O":" O":getValueSelect(0,1)==-2?">X":" X");
-        value2 = (getValue(0,2) == -1?"  ":getValue(0,2)==-2?">#":getValue(0,2)==O?getValueSelect(0,2)==-2?">O":" O":getValueSelect(0,2)==-2?">X":" X");
-        std::string row1 =  "||        "+value0+"  | "+value1+"  | "+value2+"         ||";
-        value0 = (getValue(1,0) == -1?"  ":getValue(1,0)==-2?">#":getValue(1,0)==O?getValueSelect(1,0)==-2?">O":" O":getValueSelect(1,0)==-2?">X":" X");
-        value1 = (getValue(1,1) == -1?"  ":getValue(1,1)==-2?">#":getValue(1,1)==O?getValueSelect(1,1)==-2?">O":" O":getValueSelect(1,1)==-2?">X":" X");
-        value2 = (getValue(1,2) == -1?"  ":getValue(1,2)==-2?">#":getValue(1,2)==O?getValueSelect(1,2)==-2?">O":" O":getValueSelect(1,2)==-2?">X":" X");
-        std::string row2 =  "||        "+value0+"  | "+value1+"  | "+value2+"         ||";
-        value0 = (getValue(2,0) == -1?"  ":getValue(2,0)==-2?">#":getValue(2,0)==O?getValueSelect(2,0)==-2?">O":" O":getValueSelect(2,0)==-2?">X":" X");
-        value1 = (getValue(2,1) == -1?"  ":getValue(2,1)==-2?">#":getValue(2,1)==O?getValueSelect(2,1)==-2?">O":" O":getValueSelect(2,1)==-2?">X":" X");
-        value2 = (getValue(2,2) == -1?"  ":getValue(2,2)==-2?">#":getValue(2,2)==O?getValueSelect(2,2)==-2?">O":" O":getValueSelect(2,2)==-2?">X":" X");
-        std::string row3 =  "||        "+value0+"  | "+value1+"  | "+value2+"         ||";
+        std::string row1 =  "||        "+returnValueField(0,0)+"  | "+returnValueField(0,1)+"  | "+returnValueField(0,2)+"         ||";
+        std::string row2 =  "||        "+returnValueField(1,0)+"  | "+returnValueField(1,1)+"  | "+returnValueField(1,2)+"         ||";
+        std::string row3 =  "||        "+returnValueField(2,0)+"  | "+returnValueField(2,1)+"  | "+returnValueField(2,2)+"         ||";
 
 
         initscr();
@@ -47,6 +38,16 @@ namespace Table {
         Templates::footerInfoTable();
         endwin();
 
+    }
+
+    std::string Table::returnValueField(int axiX, int axiY){
+        if(getValue(axiX, axiY) == -1){
+            return getValueSelect(axiX, axiY) == -2? ">#": "  ";
+        }else if(getValue(axiX, axiY) == X){
+            return getValueSelect(axiX, axiY) == -2? ">X": " X";
+        }else{
+            return getValueSelect(axiX, axiY) == -2? ">O": " O";
+        }
     }
 
     int Table::getValue(const unsigned int axiX, const unsigned int axiY){
@@ -85,7 +86,6 @@ namespace Table {
         }
     }
 
-
     void Table::getCoordSelect(unsigned int *axiX, unsigned int *axiY){
         for(int i=0; i<3;i++){
             for(int ii=0;ii<3;ii++){
@@ -103,7 +103,6 @@ namespace Table {
         for(int i=0;i<3;i++){
             for(int ii=0;ii<3;ii++){
                 if(m_table[i][ii] == -1){
-                    m_table[i][ii] = -2;
                     cleanTableSelect();
                     m_table_selection[i][ii] = -2;
                     return;
@@ -127,14 +126,7 @@ namespace Table {
             if(axiXX >= 0 && axiXX < 3){
                 //Muda o valor da célula de seleção
                 cleanTableSelect();                     /*Limpa a tabela de seleção*/
-                setValueSelect(&axiXX, &axiY, -2);        /*Muda o valor da nova celula*/
-                //Muda o valor da célula para real seleção
-                if(m_table[axiXX][axiY] == -1){
-                    setValue(&axiXX, &axiY, -2);          /*Muda o valor da nova celula*/
-                }
-                if(m_table[axiX][axiY] < 0){
-                     setValue(&axiX, &axiY, -1); /*Muda o valor da antiga celula*/
-                }
+                setValueSelect(&axiXX, &axiY, -2);        /*Muda o valor da nova celula*/                
             }
         }
         else if(*key == LEFT_KEY || *key == RIGHT_KEY){
@@ -147,13 +139,7 @@ namespace Table {
             if(axiYY >= 0 && axiYY < 3){
                 //Muda o valor da célula de seleção
                 cleanTableSelect();                     /*Limpa a tabela de seleção*/
-                setValueSelect(&axiX, &axiYY, -2);        /*Muda o valor da nova celula*/
-                if(m_table[axiX][axiYY] == -1){
-                    setValue(&axiX, &axiYY, -2);          /*Muda o valor da nova celula*/
-                }
-                if(m_table[axiX][axiY] < 0){
-                    setValue(&axiX, &axiY, -1); /*Muda o valor da antiga celula*/
-                }
+                setValueSelect(&axiX, &axiYY, -2);        /*Muda o valor da nova celula*/                
             }
         }
     }

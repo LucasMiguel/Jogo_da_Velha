@@ -23,7 +23,7 @@ namespace PlayPlay {
                 key = Functions::getKey();
                 m_table.moveSelection(&key);
             }
-            m_table.getCoordSelect(&coord[0], &coord[1]);
+            m_table.getCoordSelectTable(&coord[0], &coord[1]);
             if(coord[0] >= 0){
                 m_table.setValue(&coord[0], &coord[1], (turn==1?X:O));
                 end = m_table.checkWinner();
