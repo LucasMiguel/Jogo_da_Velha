@@ -11,9 +11,11 @@ namespace PlayPlay {
         int end = 0;
         int turn = 1;
         unsigned int coord[2];
+        //Pega os nomes dos jogadores
         getPlayer(1);
         getPlayer(2);
         system(CLEAR);
+        //Coloca a seleção no primeiro campo vazio
         m_table.setNewSelection();
         while(end == 0){
             while( key != ENTER_KEY){

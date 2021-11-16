@@ -6,6 +6,7 @@
 #include "include/functions.h"
 #include "include/templates.h"
 #include "include/player_vs_player.h"
+#include "include/player_vs_com.h"
 
 
 int main()
@@ -22,6 +23,7 @@ int main()
         key = 0;
     while(true){
         //Instância do objeto de jogo Player vs Player
+        PlayCom::PlayCom playCom;
         PlayPlay::PlayPlay playPlay;
         //Isntância do objeto do menu
         Menu::Menu menu;
@@ -41,7 +43,7 @@ int main()
             playPlay.game();
             break;
         case 1:
-            std::cout << "Opcao 2 do Menu" << std::endl; break;
+            playCom.game();
         case 2:
             std::cout << "Opcao 3 do Menu" << std::endl; break;
         case 3:

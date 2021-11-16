@@ -164,9 +164,9 @@ namespace Table {
             calc = (getValue(m_coor_win[i][0][0], m_coor_win[i][0][1])) +
                     (getValue(m_coor_win[i][1][0], m_coor_win[i][1][1])) +
                     (getValue(m_coor_win[i][2][0], m_coor_win[i][2][1]));
-            if(calc == 30){
+            if(calc == (X*3)){
                 return 1;
-            }else if(calc == 60){
+            }else if(calc == (O*3)){
                 return 2;
             }
         }
@@ -176,8 +176,70 @@ namespace Table {
                     return 0;
                 }
             }
-        }
+        }        
         return 3;
     }
+
+    int Table::checkWillWin(int symbol){
+        int calc = 0;
+        ///Armazena o valor que deverá usar para comparação,
+        /// utilizando cálculo de acordo com o simbolo.
+        int value = (symbol*2)-1;
+        for(int i=0;i<8;i++){
+            calc = (getValue(m_coor_win[i][0][0], m_coor_win[i][0][1])) +
+                    (getValue(m_coor_win[i][1][0], m_coor_win[i][1][1])) +
+                    (getValue(m_coor_win[i][2][0], m_coor_win[i][2][1]));
+            if(calc == value){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    void Table::coordEmpty(unsigned int* aixX, unsigned int* aixY, int index){
+        for(int i=0; i<3; i++){
+            if(getValue(m_coor_win[index][i][0], m_coor_win[index][i][1]) == -1){
+                *aixX =  m_coor_win[index][i][0];
+                *aixY =  m_coor_win[index][i][1];
+                break;
+            }
+        }
+    }
+
+    void Table::choiseBestPlay(unsigned int* axiX, unsigned int* axiY){
+        int calc = 0;
+        unsigned int index = -1;
+        ///Array que irá armazena as comparações para verificação de campos
+        int values[] = {(O-2), -3, (O+X-1)};
+        ///Armazena o valor que deverá usar para comparação,
+        /// utilizando cálculo de acordo com o simbolo.
+        for(int l=0; l<3; l++){
+            for(int i=0;i<8;i++){
+                calc = (getValue(m_coor_win[i][0][0], m_coor_win[i][0][1])) +
+                        (getValue(m_coor_win[i][1][0], m_coor_win[i][1][1])) +
+                        (getValue(m_coor_win[i][2][0], m_coor_win[i][2][1]));
+                if(calc == values[l]){
+                    coordEmpty(axiX, axiY, i);
+                    return;
+                }
+            }
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

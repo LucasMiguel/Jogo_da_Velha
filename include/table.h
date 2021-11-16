@@ -78,6 +78,25 @@ public:
      * @return O valor indicará o vencedor | 0 = Sem vencedores | 1 = Jogador 1 | 2 = Jogador 2
      */
     int checkWinner();
+    /**
+     * @brief Função que irá verificar se o 'O' está para ganhar
+     * @param identificador se é o 'X' ou 'O'.
+     * @return o index da linha de vitória. Se retornar -1 é que não existe
+     */
+    int checkWillWin(int symbol);    
+    /**
+     * @brief Função que irá retornar a coordenada vazia para se poder fazer o movimento
+     * @param aixX - Valor da coordenada em X
+     * @param aixY - Valor da coordenada em Y
+     * @param index - Valor do index da tabela de possibilidades de vitórias
+     */
+    void coordEmpty(unsigned int* aixX, unsigned int* aixY, int index);
+    /**
+     * @brief Função que irá retornar a melhor jogada para o computador.
+     * @param axiX - retorno da coo rdenada X
+     * @param axiY - retorno da coordenada Y
+     */
+    void choiseBestPlay(unsigned int* axiX, unsigned int* axiY);
 
 };
 

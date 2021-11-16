@@ -1,5 +1,5 @@
-#ifndef PLAYER_VS_PLAYER_H
-#define PLAYER_VS_PLAYER_H
+#ifndef PLAYER_VS_COM_H
+#define PLAYER_VS_COM_H
 #include "include/player.h"
 #include "table.h"
 
@@ -17,11 +17,11 @@ private:
     /**
      * @brief Função que irá fazer o movimento do computador
      */
-    void comMove();
+    void comMove();    
 public:
     PlayCom() {};
     void game();
 };
 }
 
-#endif // PLAYER_VS_PLAYER_H
+#endif // PLAYER_VS_COM_H
