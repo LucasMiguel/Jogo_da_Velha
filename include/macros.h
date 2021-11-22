@@ -38,6 +38,6 @@ const int O = 20;
 /**
  * @brief Constante com a quantidade de itens no menu
  */
-const int QUANT_ITENS_MENU = 5;
+const int QUANT_ITENS_MENU = 4;
 
 #endif // MACROS_H

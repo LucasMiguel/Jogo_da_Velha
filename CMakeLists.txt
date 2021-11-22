@@ -28,6 +28,13 @@ add_executable(Jogo_da_Velha
   include/player_vs_player.h
   src/player_vs_com.cpp
   include/player_vs_com.h
+  src/connection_db.cpp
+  include/connection_db.h
+  src/sqlite3.c
+  src/sqlite3.o
+  include/sqlite3.h
+  src/score.cpp
+  include/score.h
 )
 
 target_link_libraries(Jogo_da_Velha -lncurses)

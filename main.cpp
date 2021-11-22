@@ -7,11 +7,11 @@
 #include "include/templates.h"
 #include "include/player_vs_player.h"
 #include "include/player_vs_com.h"
-
+#include "include/connection_db.h"
+#include "include/score.h"
 
 int main()
 {
-
     /**
      * @brief Variável com o valor da tecla clicada
      */
@@ -45,9 +45,9 @@ int main()
         case 1:
             playCom.game();
         case 2:
-            std::cout << "Opcao 3 do Menu" << std::endl; break;
-        case 3:
-            std::cout << "Opcao 4 do Menu" << std::endl; break;
+            Score::showScore();
+            getchar();
+            break;
         default:
             Functions::cleanWindow();
             exit(0);
