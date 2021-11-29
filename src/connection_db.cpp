@@ -1,6 +1,7 @@
 #include <iostream>
 #include <filesystem>
 #include <unistd.h>
+#include "ncurses.h"
 #include "include/connection_db.h"
 #include "include/templates.h"
 
@@ -25,15 +26,19 @@ int ConnectionDB::callbackScore(void *NotUsed, int argc, char **argv, char **azC
     return 0;
 }
 
-bool ConnectionDB::insertDatas(char *query){
+bool ConnectionDB::insertDatas(std::string *query){
     int rc;
+    //Cria a tabela caso não tenha sido criada
+    createTable();
     rc = sqlite3_open(nameDB, &db);
+    mvaddstr(-3, 2, "Abrindo banco ...");
     if(rc){
         std::cout << "Erro: " << sqlite3_errmsg(db) << std::endl;
         return false;
     }else{
+        mvaddstr(-3, 2, "Aberto");
         //Faz a inserção da query no banco de dados
-        rc = sqlite3_exec(db, query, callback, 0, &zErrMsg);
+        rc = sqlite3_exec(db, query->c_str(), callback, 0, &zErrMsg);
         if(rc == SQLITE_OK){
             return true;
         }else{
@@ -44,12 +49,38 @@ bool ConnectionDB::insertDatas(char *query){
     sqlite3_close(db);
 }
 
+bool ConnectionDB::createTable(){
+    int rc;
+    std::string query = "CREATE TABLE score ("
+                  "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+                  "player_1 VARCHAR(20),"
+                  "player_2 VARCHAR(20),"
+                  "winner VARCHAR(20),"
+                  "data DATETIME DEFAULT CURRENT_TIMESTAMP);";
+    rc = sqlite3_open(nameDB, &db);
+    if(rc){
+        std::cout << "\n\n\nErro: " << sqlite3_errmsg(db) << std::endl;
+        return false;
+    }else{
+        //Faz a inserção da query no banco de dados
+        rc = sqlite3_exec(db, query.c_str(), callback, 0, &zErrMsg);
+        if(rc == SQLITE_OK){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    sqlite3_close(db);
+}
+
 bool ConnectionDB::getDatas(char *query){
     int rc;
-    rc = sqlite3_open(nameDB, &db);
+    rc = sqlite3_open(nameDB, &db);    
     const char* data = "Retorno do callback";
     if(rc){
-        std::cout << "Erro: " << sqlite3_errmsg(db) << std::endl;
+        std::string text = sqlite3_errmsg(db);
+        mvaddstr(-3, 2, text.c_str());
+        //        std::cout << "\n\n\nErro: " << sqlite3_errmsg(db) << std::endl;
         return false;
     }else{
         //Faz a inserção da query no banco de dados
@@ -57,7 +88,7 @@ bool ConnectionDB::getDatas(char *query){
         if(rc == SQLITE_OK){
             return true;
         }else{
-            std::cout << "Erro: " << zErrMsg << std::endl;
+            std::cout << "\n\n\nErro: " << zErrMsg << std::endl;
             return false;
         }
     }

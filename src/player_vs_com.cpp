@@ -1,16 +1,24 @@
 #include <iostream>
+#include <string>
+#include <cctype>
+#include <algorithm>
 #include "include/macros.h"
 #include "include/functions.h"
 #include "include/player_vs_com.h"
 #include "include/templates.h"
 #include "ncurses.h"
+#include "include/connection_db.h"
 
 namespace PlayCom {
 
     void PlayCom::game(){
+        ///Instância da classe de comunicação com o banco de dados
+        ConnectionDB::ConnectionDB conn;
+        ///Variável que irá armazenar o valor que será mandado para o banco
+        std::string query;
         int key = 0;
         int end = 0;
-        int turn = 1;
+        int turn = 1;        
         unsigned int coord[2];
         //Pega os nomes do jogador
         getPlayer(1);
@@ -52,11 +60,15 @@ namespace PlayCom {
         }
         Functions::cleanWindow();
         if(end == 1){
+            query = "INSERT INTO score (player_1, player_2, winner) VALUES(" + m_player_1.getName() + ", " + m_player_2.getName() + ", " + m_player_1.getName()+ ");";
+            conn.insertDatas(&query);
             while( key != ENTER_KEY){
                 Templates::victoryMensage(m_player_1.getName());
                 key = Functions::getKey();
             }
         }else if(end == 2){
+            query = "INSERT INTO score (player_1, player_2, winner) VALUES(" + m_player_1.getName() + ", " + m_player_2.getName() + ", " + m_player_2.getName()+ ");";
+            conn.insertDatas(&query);
             while( key != ENTER_KEY){
                 Templates::victoryMensage(m_player_2.getName());
                 key = Functions::getKey();
@@ -68,6 +80,7 @@ namespace PlayCom {
                 key = Functions::getKey();
             }
         }
+
     }
 
     void PlayCom::getPlayer(const int num){
@@ -76,9 +89,16 @@ namespace PlayCom {
         if(num==1){
             Templates::header(1);
             std::cout << "\t\t Insira o nome do Jogador: ";
-            std::cin >> name;
-            m_player_1.setName(&name);
-            m_player_1.setSymbol(X);
+            getline(std::cin, name);
+            //Tira os espaços em branco do começo e final do nome
+            name.erase(std::remove_if(name.begin(), name.end(), ::isspace), name.end());
+            //Teste para saber se o realmente foi inserido um valor
+            if(name.length() != 0){
+                m_player_1.setName(&name);
+                m_player_1.setSymbol(X);
+            }else{
+                PlayCom::getPlayer(num);
+            }
         }else{
             std::string nameCom = "COM";
             m_player_2.setName(&nameCom);

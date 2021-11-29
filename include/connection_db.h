@@ -19,7 +19,20 @@ private:
      * @return
      */
     static int callback(void *NotUsed, int argc, char **argv, char **azColName);
+    /**
+     * @brief Função de Callback dos getDados
+     * @param NotUsed
+     * @param argc
+     * @param argv
+     * @param azColName
+     * @return
+     */
     static int callbackScore(void *NotUsed, int argc, char **argv, char **azColName);
+    /**
+     * @brief Função que irá criar um banco de dados
+     * @return Se já tiver criado ele irá retornar false
+     */
+    bool createTable();
 public:
     ConnectionDB() {}
     /**
@@ -27,7 +40,12 @@ public:
      * @param query
      * @return
      */
-    bool insertDatas(char *query);
+    bool insertDatas(std::string *query);
+    /**
+     * @brief Função que irá retornar os valores do banco
+     * @param query
+     * @return
+     */
     bool getDatas(char *query);
 };
 
