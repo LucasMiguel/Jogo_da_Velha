@@ -50,6 +50,7 @@ int main()
             break;
         default:
             Functions::cleanWindow();
+            system(CLEAR);
             exit(0);
         }
     }
