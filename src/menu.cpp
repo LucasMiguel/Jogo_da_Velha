@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include <curses.h>
+#include <ncurses.h>
 #include "include/menu.h"
 #include "include/templates.h"
 #include "include/macros.h"
