@@ -33,7 +33,7 @@ bool ConnectionDB::insertDatas(std::string *query){
     rc = sqlite3_open(nameDB, &db);
     mvaddstr(-3, 2, "Abrindo banco ...");
     if(rc){
-        std::cout << "Erro: " << sqlite3_errmsg(db) << std::endl;
+//        std::cout << "Erro: " << sqlite3_errmsg(db) << std::endl;
         return false;
     }else{
         mvaddstr(-3, 2, "Aberto");
@@ -42,7 +42,7 @@ bool ConnectionDB::insertDatas(std::string *query){
         if(rc == SQLITE_OK){
             return true;
         }else{
-            std::cout << "Erro: " << zErrMsg << std::endl;
+//            std::cout << "Erro: " << zErrMsg << std::endl;
             return false;
         }
     }
