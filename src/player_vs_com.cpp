@@ -100,7 +100,7 @@ namespace PlayCom {
                 PlayCom::getPlayer(num);
             }
         }else{
-            std::string nameCom = "COM";
+            std::string nameCom = "Marvim[COM]";
             m_player_2.setName(&nameCom);
             m_player_2.setSymbol(O);
         }
