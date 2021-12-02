@@ -91,7 +91,7 @@ namespace PlayCom {
             std::cout << "\t\t Insira o nome do Jogador: \n\n\t\t ";
             getline(std::cin, name);
             //Tira os espaços em branco do começo e final do nome
-            name.erase(std::remove_if(name.begin(), name.end(), ::isspace), name.end());
+            name = Functions::trim(name);
             //Teste para saber se o realmente foi inserido um valor
             if(name.length() != 0){
                 m_player_1.setName(&name);

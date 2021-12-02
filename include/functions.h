@@ -12,6 +12,21 @@ namespace Functions {
      * @brief Função que limpa a tela.
      */
     void cleanWindow();
+
+    /**
+     * @brief Função que tira os espaços da esquerda
+     */
+    std::string ltrim(const std::string &s);
+
+    /**
+     * @brief Função que tira os espaços da direita
+     */
+    std::string rtrim(const std::string &s);
+
+    /**
+     * @brief Função que tira os espaços de ambos os lados
+     */
+    std::string trim(const std::string &s);
 }
 
 #endif // FUNCTIONS_H

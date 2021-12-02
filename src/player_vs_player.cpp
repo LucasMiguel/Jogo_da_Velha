@@ -8,6 +8,7 @@
 #include "include/templates.h"
 #include "include/connection_db.h"
 
+
 namespace PlayPlay {
 
     void PlayPlay::game(){
@@ -77,7 +78,7 @@ namespace PlayPlay {
         fflush(stdin);
         getline(std::cin, name);
         //Tira os espaços em branco do começo e final do nome
-        name.erase(std::remove_if(name.begin(), name.end(), ::isspace), name.end());
+        name = Functions::trim(name);
         //Teste para saber se o realmente foi inserido um valor
         if(name.length() != 0){
             if(num==1){
