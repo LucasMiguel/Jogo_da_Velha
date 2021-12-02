@@ -88,7 +88,7 @@ namespace PlayCom {
         system(CLEAR);
         if(num==1){
             Templates::header(1);
-            std::cout << "\t\t Insira o nome do Jogador: ";
+            std::cout << "\t\t Insira o nome do Jogador: \n\n\t\t ";
             getline(std::cin, name);
             //Tira os espaços em branco do começo e final do nome
             name.erase(std::remove_if(name.begin(), name.end(), ::isspace), name.end());

@@ -44,6 +44,7 @@ int main()
             break;
         case 1:
             playCom.game();
+            break;
         case 2:
             Score::showScore();
             getchar();
