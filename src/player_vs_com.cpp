@@ -60,14 +60,14 @@ namespace PlayCom {
         }
         Functions::cleanWindow();
         if(end == 1){
-            query = "INSERT INTO score (player_1, player_2, winner) VALUES(" + m_player_1.getName() + ", " + m_player_2.getName() + ", " + m_player_1.getName()+ ");";
+            query = "INSERT INTO score (player_1, player_2, winner) VALUES('" + m_player_1.getName() + "', '" + m_player_2.getName() + "', '" + m_player_1.getName()+ "');";
             conn.insertDatas(&query);
             while( key != ENTER_KEY){
                 Templates::victoryMensage(m_player_1.getName());
                 key = Functions::getKey();
             }
         }else if(end == 2){
-            query = "INSERT INTO score (player_1, player_2, winner) VALUES(" + m_player_1.getName() + ", " + m_player_2.getName() + ", " + m_player_2.getName()+ ");";
+            query = "INSERT INTO score (player_1, player_2, winner) VALUES('" + m_player_1.getName() + "', '" + m_player_2.getName() + "', '" + m_player_2.getName()+ "');";
             conn.insertDatas(&query);
             while( key != ENTER_KEY){
                 Templates::victoryMensage(m_player_2.getName());
