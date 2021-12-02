@@ -1,7 +1,7 @@
 #include <iostream>
 #include <filesystem>
 #include <unistd.h>
-#include "ncurses.h"
+#include "curses.h"
 #include "include/connection_db.h"
 #include "include/templates.h"
 

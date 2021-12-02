@@ -1,5 +1,5 @@
 #include <iostream>
-#include "ncurses.h"
+#include "curses.h"
 #include "include/templates.h"
 #include "include/macros.h"
 

@@ -2,11 +2,11 @@
 #include <string>
 #include <cctype>
 #include <algorithm>
+#include <curses.h>
 #include "include/macros.h"
 #include "include/functions.h"
 #include "include/player_vs_com.h"
 #include "include/templates.h"
-#include "ncurses.h"
 #include "include/connection_db.h"
 
 namespace PlayCom {

@@ -1,5 +1,5 @@
 #include <iostream>
-#include <ncurses.h>
+#include <curses.h>
 #include <string>
 #include <regex>
 #include "include/macros.h"
