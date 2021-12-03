@@ -30,7 +30,7 @@ bool ConnectionDB::insertDatas(std::string *query){
     int rc;
     //Cria a tabela caso não tenha sido criada
     createTable();
-    rc = sqlite3_open(nameDB, &db);
+    rc = sqlite3_open(nameDB.c_str(), &db);
     mvaddstr(-3, 2, "Abrindo banco ...");
     if(rc){
 //        std::cout << "Erro: " << sqlite3_errmsg(db) << std::endl;
@@ -57,7 +57,7 @@ bool ConnectionDB::createTable(){
                   "player_2 VARCHAR(20),"
                   "winner VARCHAR(20),"
                   "data DATETIME DEFAULT CURRENT_TIMESTAMP);";
-    rc = sqlite3_open(nameDB, &db);
+    rc = sqlite3_open(nameDB.c_str(), &db);
     if(rc){
         std::cout << "\n\n\nErro: " << sqlite3_errmsg(db) << std::endl;
         return false;
@@ -71,11 +71,12 @@ bool ConnectionDB::createTable(){
         }
     }
     sqlite3_close(db);
+    return false;
 }
 
-bool ConnectionDB::getDatas(char *query){
+bool ConnectionDB::getDatas(std::string query){
     int rc;
-    rc = sqlite3_open(nameDB, &db);    
+    rc = sqlite3_open(nameDB.c_str(), &db);
     const char* data = "Retorno do callback";
     if(rc){
         std::string text = sqlite3_errmsg(db);
@@ -84,7 +85,7 @@ bool ConnectionDB::getDatas(char *query){
         return false;
     }else{
         //Faz a inserção da query no banco de dados
-        rc = sqlite3_exec(db, query, callbackScore, (void*)data, &zErrMsg);
+        rc = sqlite3_exec(db, query.c_str(), callbackScore, (void*)data, &zErrMsg);
         if(rc == SQLITE_OK){
             return true;
         }else{

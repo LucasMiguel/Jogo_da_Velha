@@ -7,7 +7,7 @@ namespace ConnectionDB {
 class ConnectionDB
 {
 private:
-    char *nameDB = "score.db";
+    std::string nameDB = "score.db";
     sqlite3 *db;
     char * zErrMsg;
     /**
@@ -46,7 +46,7 @@ public:
      * @param query
      * @return
      */
-    bool getDatas(char *query);
+    bool getDatas(std::string query);
 };
 
 }
