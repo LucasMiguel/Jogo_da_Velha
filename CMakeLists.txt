@@ -25,12 +25,20 @@ add_executable(Jogo_da_Velha
   src/player_vs_com.cpp
   include/player_vs_com.h
   src/connection_db.cpp
-  include/connection_db.h
+  include/connection_db.h  
   src/sqlite3.c
-  src/sqlite3.o
+  src/shell.c
   include/sqlite3.h
+  include/sqlite3ext.h
   src/score.cpp
   include/score.h
 )
 
-target_link_libraries(Jogo_da_Velha -lncurses)
+target_link_libraries(Jogo_da_Velha -lncurses -lsqlite3)
+
+add_definitions(-DSQLITE_ENABLE_RTREE)
+add_definitions(-DSQLITE_ENABLE_FTS4)
+add_definitions(-DSQLITE_ENABLE_FTS5)
+add_definitions(-DSQLITE_ENABLE_JSON1)
+add_definitions(-DSQLITE_ENABLE_RBU)
+add_definitions(-DSQLITE_ENABLE_STAT4)
