@@ -1,7 +1,9 @@
 #ifndef TEMPLATES_H
 #define TEMPLATES_H
+#include <string>
 
 namespace Templates {
+class Table;
     /**
      * @brief Função com a tela de boas vinda ao jogo
      */
@@ -13,11 +15,11 @@ namespace Templates {
     /**
      * @brief Função para tela de vitória do jogador
      */
-    void victoryMensage(const std::string&);
+    void victoryMensage(const std::string&, int, std::string table[][3]);
     /**
      * @brief Exibe a mensagem de empate
      */
-    void drawMensage();
+    void drawMensage(std::string table[][3]);
     /**
      * @brief Função com as informações
      */

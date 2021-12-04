@@ -50,6 +50,12 @@ namespace Table {
         }
     }
 
+    std::string Table::returnValuePlayer(int axiX, int axiY){
+        int value = getValue(axiX, axiY);
+        return value == -1? "  ": value == X? " X" : " O";
+    }
+
+
     int Table::getValue(const unsigned int axiX, const unsigned int axiY){
         return m_table[axiX][axiY];
     }
@@ -212,20 +218,4 @@ namespace Table {
         }
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

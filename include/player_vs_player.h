@@ -1,6 +1,6 @@
 #ifndef PLAYER_VS_PLAYER_H
 #define PLAYER_VS_PLAYER_H
-#include "include/player.h"
+#include "player.h"
 #include "table.h"
 
 namespace PlayPlay {

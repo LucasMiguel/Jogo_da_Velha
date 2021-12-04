@@ -1,8 +1,10 @@
 #ifndef TABLE_H
 #define TABLE_H
-#include "include/macros.h"
-#include "include/templates.h"
-#include "include/player.h"
+#include <string>
+#include "macros.h"
+#include "templates.h"
+#include "player.h"
+
 
 namespace Table {
 
@@ -40,6 +42,13 @@ public:
      * @return - A string que irá no campo.
      */
     std::string returnValueField(int axiX, int axiY);
+    /**
+     * @brief Função que retorna a string para o campo da matriz de jogadas.
+     * @param axiX - Coordenada em X.
+     * @param axiY - Coordenada em Y.
+     * @return - A string que irá no campo.
+     */
+    std::string returnValuePlayer(int axiX, int axiY);
     /**
      * @brief Função que pega o valor da célula selecionada
      * @return O valor da célula.

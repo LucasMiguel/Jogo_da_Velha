@@ -18,7 +18,8 @@ namespace PlayCom {
         std::string query;
         int key = 0;
         int end = 0;
-        int turn = 1;        
+        int turn = 1;
+        std::string valuesEndPlay[3][3];
         unsigned int coord[2];
         //Pega os nomes do jogador
         getPlayer(1);
@@ -59,24 +60,29 @@ namespace PlayCom {
             }
         }
         Functions::cleanWindow();
+        for(int i=0; i<3; i++){
+            for (int ii=0; ii<3;ii++){
+                valuesEndPlay[i][ii] = m_table.returnValuePlayer(i, ii);
+            }
+        }
         if(end == 1){
             query = "INSERT INTO score (player_1, player_2, winner) VALUES('" + m_player_1.getName() + "', '" + m_player_2.getName() + "', '" + m_player_1.getName()+ "');";
             conn.insertDatas(&query);
             while( key != ENTER_KEY){
-                Templates::victoryMensage(m_player_1.getName());
+                Templates::victoryMensage(m_player_1.getName(), 1, valuesEndPlay);
                 key = Functions::getKey();
             }
         }else if(end == 2){
             query = "INSERT INTO score (player_1, player_2, winner) VALUES('" + m_player_1.getName() + "', '" + m_player_2.getName() + "', '" + m_player_2.getName()+ "');";
             conn.insertDatas(&query);
             while( key != ENTER_KEY){
-                Templates::victoryMensage(m_player_2.getName());
+                Templates::victoryMensage(m_player_2.getName(), 2, valuesEndPlay);
                 key = Functions::getKey();
             }
         }
         else{
             while( key != ENTER_KEY){
-                Templates::drawMensage();
+                Templates::drawMensage(valuesEndPlay);
                 key = Functions::getKey();
             }
         }

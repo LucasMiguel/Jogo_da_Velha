@@ -19,6 +19,7 @@ namespace PlayPlay {
         int key = 0;
         int end = 0;
         int turn = 1;
+        std::string valuesEndPlay[3][3];
         unsigned int coord[2];
         //Pega os nomes dos jogadores
         getPlayer(1);
@@ -45,24 +46,29 @@ namespace PlayPlay {
             }
         }
         Functions::cleanWindow();
+        for(int i=0; i<3; i++){
+            for (int ii=0; ii<3;ii++){
+                valuesEndPlay[i][ii] = m_table.returnValuePlayer(i, ii);
+            }
+        }
         if(end == 1){
             query = "INSERT INTO score (player_1, player_2, winner) VALUES('" + m_player_1.getName() + "', '" + m_player_2.getName() + "', '" + m_player_1.getName()+ "');";
             conn.insertDatas(&query);
             while( key != ENTER_KEY){
-                Templates::victoryMensage(m_player_1.getName());
+                Templates::victoryMensage(m_player_1.getName(), X, valuesEndPlay);
                 key = Functions::getKey();
             }
         }else if(end == 2){
             query = "INSERT INTO score (player_1, player_2, winner) VALUES('" + m_player_1.getName() + "', '" + m_player_2.getName() + "', '" + m_player_2.getName()+ "');";
             conn.insertDatas(&query);
             while( key != ENTER_KEY){
-                Templates::victoryMensage(m_player_2.getName());
+                Templates::victoryMensage(m_player_2.getName(), O, valuesEndPlay);
                 key = Functions::getKey();
             }
         }
         else{
             while( key != ENTER_KEY){
-                Templates::drawMensage();
+                Templates::drawMensage(valuesEndPlay);
                 key = Functions::getKey();
             }
         }
