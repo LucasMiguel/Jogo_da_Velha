@@ -89,6 +89,10 @@ namespace PlayCom {
 
     }
 
+    void PlayCom::getDifficulty(){
+
+    }
+
     void PlayCom::getPlayer(const int num){
         std::string name;
         system(CLEAR);

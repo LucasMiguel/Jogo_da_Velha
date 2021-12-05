@@ -7,9 +7,10 @@ Jogo da velha para aprendizagem da linguagem C/C++, Orientação Objeto e banco 
 
 ## Requisitos
 
-* Qualquer distribuição linux (Ex: Fedora, Ubuntu) [Não disponível para Windows]
-* Biblioteca ncurses
-* Cmake
+* Qualquer distribuição linux (Ex: Fedora, Ubuntu) [Não disponível para Windows],
+* Biblioteca ncurses,
+* Cmake,
+* Compilador C++ (Ex.: g++, Clang),
 
 ## Instalação ncurses
 
